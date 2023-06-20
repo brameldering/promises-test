@@ -42,13 +42,31 @@ const getDogPic = async () => {
     console.log("Random img saved");
   } catch (error) {
     console.log("error " + error);
+    throw error;
   }
-  return "2: Ready";
+  return "2 - Ready";
 };
 
-console.log("1 - about to call getDogPic");
-getDogPic().then((x) => console.log(x));
-console.log("3 - after call getDogPic");
+(async () => {
+  try {
+    console.log("1 - about to call getDogPic");
+    const x = await getDogPic();
+    console.log(x);
+    console.log("3 - after call getDogPic");
+  } catch (err) {
+    console.log("error from getDogPic " + err);
+  }
+})();
+
+// console.log("1 - about to call getDogPic");
+// getDogPic()
+//   .then((x) => {
+//     console.log(x);
+//     console.log("3 - after call getDogPic");
+//   })
+//   .catch((err) => {
+//     console.log("error from getDogPic " + err);
+//   });
 
 // readFilePromise(`${__dirname}/../dog.txt`)
 //   .then((data) => {
