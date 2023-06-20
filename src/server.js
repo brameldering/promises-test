@@ -40,9 +40,10 @@ readFilePromise(`${__dirname}/../dog.txt`)
   .then((res) => {
     console.log(res.body.message);
     const payload = res.body.message + " - " + new Date();
-    writeFilePromise("dog-img.txt", payload).then(console.log("Random img saved"));
+    return writeFilePromise("dog-img.txt", payload);
   })
-  .catch((err) => console.log("error " + err.message));
+  .then(console.log("Random img saved"))
+  .catch((err) => console.log("error " + err));
 
 // app.get("/", (req, res) => {
 //   res.send("Hello World!");
