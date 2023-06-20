@@ -11,7 +11,8 @@
   "author": "Bram Eldering",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "superagent": "^8.0.9"
   },
   "devDependencies": {
     "eslint": "^8.43.0",
