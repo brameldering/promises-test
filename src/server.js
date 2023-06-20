@@ -33,7 +33,7 @@ const writeFilePromise = (fileName, payload) => {
 
 const getDogPic = async () => {
   try {
-    const data = await readFilePromise(`${__dirname}/../dogg.txt`);
+    const data = await readFilePromise(`${__dirname}/../dog.txt`);
     console.log(`Breed: ${data}`);
     const res = await superagent.get(`https://dog.ceo/api/breed/${data}/images/random`);
     console.log(res.body.message);
@@ -43,9 +43,12 @@ const getDogPic = async () => {
   } catch (error) {
     console.log("error " + error);
   }
+  return "2: Ready";
 };
 
-getDogPic();
+console.log("1 - about to call getDogPic");
+getDogPic().then((x) => console.log(x));
+console.log("3 - after call getDogPic");
 
 // readFilePromise(`${__dirname}/../dog.txt`)
 //   .then((data) => {
