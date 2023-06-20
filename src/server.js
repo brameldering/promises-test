@@ -35,11 +35,12 @@ readFilePromise(`${__dirname}/../dog.txt`)
   .then((data) => {
     console.log(`Breed: ${data}`);
 
-    superagent.get(`https://dog.ceo/api/breed/${data}/images/random`).then((res) => {
-      console.log(res.body.message);
-      const payload = res.body.message + " - " + new Date();
-      writeFilePromise("dog-img.txt", payload).then(console.log("Random img saved"));
-    });
+    return superagent.get(`https://dog.ceo/api/breed/${data}/images/random`);
+  })
+  .then((res) => {
+    console.log(res.body.message);
+    const payload = res.body.message + " - " + new Date();
+    writeFilePromise("dog-img.txt", payload).then(console.log("Random img saved"));
   })
   .catch((err) => console.log("error " + err.message));
 
