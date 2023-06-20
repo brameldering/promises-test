@@ -16,7 +16,7 @@ const __dirname = path.dirname(__filename);
 const readFilePromise = (fileName) => {
   return new Promise((resolve, reject) => {
     fs.readFile(fileName, (err, data) => {
-      if (err) reject(`I could not find the file 😢 ${err.message}`);
+      if (err) reject(`I could not find the file 😢 \n ${err.message}`);
       resolve(data);
     });
   });
@@ -25,20 +25,24 @@ const readFilePromise = (fileName) => {
 const writeFilePromise = (fileName, payload) => {
   return new Promise((resolve, reject) => {
     fs.writeFile(fileName, payload, (err) => {
-      if (err) reject(`I could not write to file 😢 ${err.message}`);
+      if (err) reject(`I could not write to file 😢 \n ${err.message}`);
       resolve("success");
     });
   });
 };
 
 const getDogPic = async () => {
-  const data = await readFilePromise(`${__dirname}/../dog.txt`);
-  console.log(`Breed: ${data}`);
-  const res = await superagent.get(`https://dog.ceo/api/breed/${data}/images/random`);
-  console.log(res.body.message);
-  const payload = res.body.message + " - " + new Date();
-  await writeFilePromise("dog-img.txt", payload);
-  console.log("Random img saved");
+  try {
+    const data = await readFilePromise(`${__dirname}/../dogg.txt`);
+    console.log(`Breed: ${data}`);
+    const res = await superagent.get(`https://dog.ceo/api/breed/${data}/images/random`);
+    console.log(res.body.message);
+    const payload = res.body.message + " - " + new Date();
+    await writeFilePromise("dog-img.txt", payload);
+    console.log("Random img saved");
+  } catch (error) {
+    console.log("error " + error);
+  }
 };
 
 getDogPic();
